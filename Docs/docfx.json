@@ -1,0 +1,70 @@
+{
+
+  //// Metadata section - generates API documentation from code
+  //"metadata": [
+  //  {
+  //    "src": [
+  //      {
+  //        "files": [ "../SourceCode/**/*.csproj" ], // or "../Source code/**/*.cs" for individual files
+  //        "exclude": [ "../Source code/**/bin/**", "../Source code/**/obj/**" ]
+  //      }
+  //    ],
+  //    "dest": "api", // Output to Docs/api folder
+  //    "properties": {
+  //    "TargetFramework": "net6.0" // Optional, only if needed
+  //    }
+  //  }
+  //],
+
+  // Build section - builds your documentation site
+  "build": {
+    // Output directory for the generated site
+    "dest": "_site",
+
+    // Global metadata available in all markdown files as variables (e.g. {{name}})
+    "globalMetadata": {
+      "_appTitle": "My Project Documentation",
+      "_enableSearch": true,
+      "author": "Your Name",
+      "docfxVersion": "v3"
+    },
+
+    // Files or folders to include in documentation
+    "content": [
+      {
+        "files": [ "**/*.md", "**/*.yml" ],
+        "exclude": [ "**/obj/**", "**/bin/**" ]
+      },
+      {
+        // Optional: include custom toc.md
+        "files": [ "toc.yml" ]
+      }
+    ],
+
+    // Files to copy as-is (e.g. CSS, JS, images)
+    "resource": [
+      {
+        "files": [ "images/**", "styles/**", "scripts/**" ]
+      }
+    ],
+
+    // Optional: Theme customization
+    "template": [
+      "default", // Built-in theme
+      "templates/custom" // Custom theme folder
+    ],
+
+    // Post-processing options
+    "postProcessors": [ "ExtractSearchIndex" ], // Enables search
+
+    // Export PDF (optional)
+    "overwrite": [
+      {
+        "files": [ "apidocs/overwrite/*.md" ]
+      }
+    ],
+
+    // Optional: Maximum parallelism (default is CPU count)
+    "maxParallelism": 4
+  }
+}

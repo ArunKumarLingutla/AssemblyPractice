@@ -1,0 +1,17 @@
+{
+  "Docs/getting-started.html": {
+    "href": "Docs/getting-started.html",
+    "title": "Getting Started | My Project Documentation",
+    "summary": "Getting Started"
+  },
+  "Docs/introduction.html": {
+    "href": "Docs/introduction.html",
+    "title": "Introduction | My Project Documentation",
+    "summary": "Introduction"
+  },
+  "index.html": {
+    "href": "index.html",
+    "title": "This is the HOMEPAGE. | My Project Documentation",
+    "summary": "This is the HOMEPAGE. Refer to Markdown for how to write markdown files. Quick Start Notes: Add images to the images folder if the file is referencing an image."
+  }
+}
