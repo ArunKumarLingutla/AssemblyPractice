@@ -1,4 +1,0 @@
-[2025-12-21 11:13:46] [Info] ===== NX Logging Started =====
-[2025-12-21 11:13:46] [Debug] User: arunk, NX Version: v12
-[2025-12-21 11:13:46] [Info] Tool initialized with input directory: C:\Users\arunk\source\repos\NXOpenSetUPCSharp\Input
-[2025-12-21 11:13:46] [Info] Output directory set to: C:\Users\arunk\source\repos\NXOpenSetUPCSharp\Output

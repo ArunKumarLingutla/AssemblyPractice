@@ -7,8 +7,8 @@
     <ProjectGuid>{CE6481E4-00A2-480A-B7B1-C370F64C4E30}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>NXOpenSetUPCSharp</RootNamespace>
-    <AssemblyName>NXOpenSetUPCSharp</AssemblyName>
+    <RootNamespace>AssemblyPractice</RootNamespace>
+    <AssemblyName>AssemblyPractice</AssemblyName>
     <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
@@ -56,21 +56,24 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AssemblyUtilities.cs" />
     <Compile Include="FileManager.cs" />
     <Compile Include="InputProperties.cs" />
     <Compile Include="Names.cs" />
     <Compile Include="NXLogger.cs" />
-    <Compile Include="NXOpenSetUPCsharp.cs" />
+    <Compile Include="AssemblyPractice.cs" />
     <Compile Include="NXUtilities.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ProjectSetUp.cs" />
     <Compile Include="ProjectVariables.cs" />
+    <Compile Include="UI_Part_Selection.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Res\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <EmbeddedResource Include="NXSigningResource.res" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Res\UI_Part_Selection.dlx" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

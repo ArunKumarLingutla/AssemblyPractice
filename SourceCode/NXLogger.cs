@@ -5,9 +5,9 @@ using System.Text;
 using System.Threading.Tasks;
 using System.IO;
 using NXOpen;
-using NXOpenSetUPCSharp;
+using AssemblyPractice;
 
-namespace NXOpenSetUPCSharp
+namespace AssemblyPractice
 {
     public enum LogLevel
     {

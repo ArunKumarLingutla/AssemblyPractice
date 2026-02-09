@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 
-namespace NXOpenSetUPCSharp
+namespace AssemblyPractice
 {
     public class FileManager
     {

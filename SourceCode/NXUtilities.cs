@@ -5,11 +5,12 @@ using NXOpen.UF;
 using NXOpen.Utilities;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace NXOpenSetUPCSharp
+namespace AssemblyPractice
 {
     public class NXUtilities
     {
@@ -94,6 +95,8 @@ namespace NXOpenSetUPCSharp
 
             return feature1;
         }
+
+        
 
         /// <summary>
         /// After activating sketch environment and creating sketch, it should be deactivated

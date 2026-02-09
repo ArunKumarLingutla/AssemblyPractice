@@ -6,9 +6,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace NXOpenSetUPCSharp
+namespace AssemblyPractice
 {
-    public class NXOpenSetUPCsharp
+    public class AssemblyPractice
     {
         //class members
         private static NXOpen.Session theSession = null;
@@ -19,6 +19,8 @@ namespace NXOpenSetUPCSharp
         {
             try
             {
+                string desktopPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+                AssemblyUtilities.CreateNewAssemPart("AssemblyPractice", desktopPath);
                 theSession = Session.GetSession();
                 theUFSession = NXOpen.UF.UFSession.GetUFSession();
                 theUI = NXOpen.UI.GetUI();
@@ -29,9 +31,11 @@ namespace NXOpenSetUPCSharp
                 //Write your code here
                 
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                NXLogger.Instance.LogException(ex);
                 NXLogger.Instance.Dispose();
+                throw;
             }
         }
 
