@@ -68,12 +68,11 @@
     <Compile Include="ProjectVariables.cs" />
     <Compile Include="UI_Part_Selection.cs" />
   </ItemGroup>
-  <ItemGroup />
-  <ItemGroup>
-    <EmbeddedResource Include="NXSigningResource.res" />
-  </ItemGroup>
   <ItemGroup>
     <None Include="Res\UI_Part_Selection.dlx" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="NXSigningResource.res" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

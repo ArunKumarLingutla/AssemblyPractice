@@ -1,4 +1,0 @@
-[2026-02-09 21:15:27] [Info] ===== NX Logging Started =====
-[2026-02-09 21:15:27] [Debug] User: arunk, NX Version: v12
-[2026-02-09 21:15:27] [Info] Tool initialized with input directory: C:\Users\arunk\source\repos\AssemblyPractice\Input
-[2026-02-09 21:15:27] [Info] Output directory set to: C:\Users\arunk\source\repos\AssemblyPractice\Output

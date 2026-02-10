@@ -10,5 +10,6 @@ namespace AssemblyPractice
     {
         public static string InputDirectory { get; set; }
         public static string OutputDirectory { get; set; }
+        public string FolderWithParts { get; set; }
     }
 }

@@ -1,0 +1,8 @@
+[2026-02-10 21:38:00] [Info] ===== NX Logging Started =====
+[2026-02-10 21:38:00] [Debug] User: arunk, NX Version: v12
+[2026-02-10 21:38:00] [Info] Tool initialized with input directory: C:\Users\arunk\source\repos\AssemblyPractice\Input
+[2026-02-10 21:38:00] [Info] Output directory set to: C:\Users\arunk\source\repos\AssemblyPractice\Output
+[2026-02-10 21:38:40] [Error] Exception: Third parameter is invalid
+[2026-02-10 21:38:40] [Debug] Stack Trace:    at UI_Part_Selection..ctor(ProjectVariables projVariablesObj) in C:\Users\arunk\source\repos\AssemblyPractice\SourceCode\UI_Part_Selection.cs:line 84
+   at AssemblyPractice.AssemblyPractice.Main(String[] args) in C:\Users\arunk\source\repos\AssemblyPractice\SourceCode\AssemblyPractice.cs:line 37
+[2026-02-10 21:38:40] [Info] ===== NX Logging Ended =====

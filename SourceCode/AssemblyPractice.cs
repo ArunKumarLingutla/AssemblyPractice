@@ -14,6 +14,8 @@ namespace AssemblyPractice
         private static NXOpen.Session theSession = null;
         private static NXOpen.UF.UFSession theUFSession = null;
         private static NXOpen.UI theUI = null;
+        public static UI_Part_Selection theUI_Part_Selection = null;
+        public static ProjectVariables projVariablesObj;
 
         public static void Main(string[] args)
         {
@@ -28,14 +30,27 @@ namespace AssemblyPractice
                 NXOpen.Part displayPart = theSession.Parts.Display;
                 ProjectSetUp.InitializeTool();
 
+                projVariablesObj = new ProjectVariables();
                 //Write your code here
-                
+                if (!theSession.IsBatch)
+                {
+                    theUI_Part_Selection = new UI_Part_Selection(projVariablesObj);
+                    // The following method shows the dialog immediately
+                    theUI_Part_Selection.Show(); 
+                }
+                UI.GetUI().NXMessageBox.Show("DLX Path", NXMessageBox.DialogType.Information, projVariablesObj.FolderWithParts);
             }
             catch (Exception ex)
             {
                 NXLogger.Instance.LogException(ex);
                 NXLogger.Instance.Dispose();
                 throw;
+            }
+            finally
+            {
+                if (theUI_Part_Selection != null)
+                    theUI_Part_Selection.Dispose();
+                theUI_Part_Selection = null;
             }
         }
 
