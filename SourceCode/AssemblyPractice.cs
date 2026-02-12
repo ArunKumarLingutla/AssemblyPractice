@@ -2,6 +2,7 @@
 using NXOpen.UF;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -15,14 +16,15 @@ namespace AssemblyPractice
         private static NXOpen.UF.UFSession theUFSession = null;
         private static NXOpen.UI theUI = null;
         public static UI_Part_Selection theUI_Part_Selection = null;
-        public static ProjectVariables projVariablesObj;
+        public static ProjectVariables projVariablesObj = null;
 
         public static void Main(string[] args)
         {
             try
             {
                 string desktopPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
-                AssemblyUtilities.CreateNewAssemPart("AssemblyPractice", desktopPath);
+                //AssemblyUtilities.CreateNewAssemPart("AssemblyPractice", desktopPath);
+                AssemblyUtilities.CreateNewPartUsingNewDisplayMethod("AssemblyPractice", desktopPath);
                 theSession = Session.GetSession();
                 theUFSession = NXOpen.UF.UFSession.GetUFSession();
                 theUI = NXOpen.UI.GetUI();
@@ -30,15 +32,25 @@ namespace AssemblyPractice
                 NXOpen.Part displayPart = theSession.Parts.Display;
                 ProjectSetUp.InitializeTool();
 
-                projVariablesObj = new ProjectVariables();
                 //Write your code here
-                if (!theSession.IsBatch)
+                if (!theSession.IsBatch && projVariablesObj==null)
                 {
+                    projVariablesObj = new ProjectVariables();
+
                     theUI_Part_Selection = new UI_Part_Selection(projVariablesObj);
                     // The following method shows the dialog immediately
                     theUI_Part_Selection.Show(); 
                 }
                 UI.GetUI().NXMessageBox.Show("DLX Path", NXMessageBox.DialogType.Information, projVariablesObj.FolderWithParts);
+                Directory.GetFiles(projVariablesObj.FolderWithParts);
+                foreach (var item in Directory.GetFiles(projVariablesObj.FolderWithParts))
+                {
+                    if (item.EndsWith(".prt"))
+                    {
+                        AssemblyUtilities.AddComponentToWorkPart(item);
+                        NXLogger.Instance.Log("Added component: " + item);
+                    }
+                }
             }
             catch (Exception ex)
             {

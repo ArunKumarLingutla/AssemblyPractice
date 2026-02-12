@@ -64,9 +64,9 @@ public class UI_Part_Selection
             this.projVariablesObj = projVariablesObj;
             string exePath = System.Reflection.Assembly.GetExecutingAssembly().Location;
             DirectoryInfo directoryInfo = new DirectoryInfo(exePath);
-            DirectoryInfo dlxFolder = Directory.GetParent(exePath).Parent;
-            string dlxPath = Path.Combine(dlxFolder.FullName,"Res", "UI_Part_Selection.dlx");
-            UI.GetUI().NXMessageBox.Show("DLX Path", NXMessageBox.DialogType.Information, projVariablesObj.FolderWithParts);
+            DirectoryInfo sourceFolder = Directory.GetParent(exePath).Parent.Parent;
+            string dlxPath = Path.Combine(sourceFolder.FullName,"Res", "UI_Part_Selection.dlx");
+            NXLogger.Instance.Log("DLX Path: " + dlxPath);
 
             theSession = Session.GetSession();
             theUI = UI.GetUI();

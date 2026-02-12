@@ -1,0 +1,7 @@
+[2026-02-12 21:58:42] [Info] ===== NX Logging Started =====
+[2026-02-12 21:58:43] [Debug] User: arunk, NX Version: v12
+[2026-02-12 21:58:43] [Info] Tool initialized with input directory: C:\Users\arunk\source\repos\AssemblyPractice\Input
+[2026-02-12 21:58:43] [Info] Output directory set to: C:\Users\arunk\source\repos\AssemblyPractice\Output
+[2026-02-12 21:58:43] [Info] DLX Path: C:\Users\arunk\source\repos\AssemblyPractice\SourceCode\Res\UI_Part_Selection.dlx
+[2026-02-12 21:58:54] [Info] Added component: C:\Users\arunk\OneDrive\Desktop\NX Practice\model1.prt
+[2026-02-12 21:58:54] [Info] Added component: C:\Users\arunk\OneDrive\Desktop\NX Practice\model2.prt
