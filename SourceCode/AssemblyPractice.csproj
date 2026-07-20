@@ -57,6 +57,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AssemblyUtilities.cs" />
+    <Compile Include="FacePractice.cs" />
     <Compile Include="FileManager.cs" />
     <Compile Include="InputProperties.cs" />
     <Compile Include="Names.cs" />

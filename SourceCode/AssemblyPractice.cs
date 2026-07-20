@@ -6,6 +6,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static NXOpen.GeometricAnalysis.GeometricProperties;
 
 namespace AssemblyPractice
 {
@@ -24,7 +25,7 @@ namespace AssemblyPractice
             {
                 string desktopPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
                 //AssemblyUtilities.CreateNewAssemPart("AssemblyPractice", desktopPath);
-                AssemblyUtilities.CreateNewPartUsingNewDisplayMethod("AssemblyPractice", desktopPath);
+                //AssemblyUtilities.CreateNewAssemblyPartUsingNewDisplayMethod("AssemblyPractice", desktopPath);
                 theSession = Session.GetSession();
                 theUFSession = NXOpen.UF.UFSession.GetUFSession();
                 theUI = NXOpen.UI.GetUI();
@@ -32,25 +33,49 @@ namespace AssemblyPractice
                 NXOpen.Part displayPart = theSession.Parts.Display;
                 ProjectSetUp.InitializeTool();
 
-                //Write your code here
-                if (!theSession.IsBatch && projVariablesObj==null)
-                {
-                    projVariablesObj = new ProjectVariables();
+                ////Write your code here
+                //if (!theSession.IsBatch && projVariablesObj==null)
+                //{
+                //    projVariablesObj = new ProjectVariables();
 
-                    theUI_Part_Selection = new UI_Part_Selection(projVariablesObj);
-                    // The following method shows the dialog immediately
-                    theUI_Part_Selection.Show(); 
-                }
-                UI.GetUI().NXMessageBox.Show("DLX Path", NXMessageBox.DialogType.Information, projVariablesObj.FolderWithParts);
-                Directory.GetFiles(projVariablesObj.FolderWithParts);
-                foreach (var item in Directory.GetFiles(projVariablesObj.FolderWithParts))
+                //    theUI_Part_Selection = new UI_Part_Selection(projVariablesObj);
+                //    // The following method shows the dialog immediately
+                //    theUI_Part_Selection.Show(); 
+                //}
+                ////UI.GetUI().NXMessageBox.Show("DLX Path", NXMessageBox.DialogType.Information, projVariablesObj.FolderWithParts);
+                ////Directory.GetFiles(projVariablesObj.FolderWithParts);
+                ////foreach (var item in Directory.GetFiles(projVariablesObj.FolderWithParts))
+                ////{
+                ////    if (item.EndsWith(".prt"))
+                ////    {
+                ////        AssemblyUtilities.AddComponentToWorkPart(item);
+                ////        NXLogger.Instance.Log("Added component: " + item);
+                ////    }
+                ////}
+
+                ////Get components from assembly
+                var root = workPart.ComponentAssembly.RootComponent;
+                List<NXOpen.Face> reqFacesModel1 = new List<NXOpen.Face>();
+                List<NXOpen.Face> reqFacesModel2 = new List<NXOpen.Face>();
+
+                foreach (var comp in root.GetChildren())
                 {
-                    if (item.EndsWith(".prt"))
+                    if (comp.Name.ToLower() == "model1")
                     {
-                        AssemblyUtilities.AddComponentToWorkPart(item);
-                        NXLogger.Instance.Log("Added component: " + item);
+                        reqFacesModel1 = AssemblyUtilities.GetFaceInComponent(comp, "cylindrical", "outward");
+                    }
+                    else if (comp.Name.ToLower() == "model2")
+                    {
+                        reqFacesModel2 = AssemblyUtilities.GetFaceInComponent(comp, "cylindrical", "inward");
                     }
                 }
+                reqFacesModel1[0].Highlight(); reqFacesModel2[0].Highlight() ;
+                NXLogger.Instance.Log("Number of cylindrical faces in Model1: " + reqFacesModel1.Count);
+                NXLogger.Instance.Log("Number of cylindrical faces in Model2: " + reqFacesModel2.Count);
+
+                NXOpen.Edge edge1 = reqFacesModel1[0].GetEdges()[0];
+                NXOpen.Edge edge2 = reqFacesModel2[0].GetEdges()[1];
+                AssemblyUtilities.CreateConcentricConstraint(reqFacesModel1[0].OwningComponent, edge1,  reqFacesModel2[0].OwningComponent, edge2);
             }
             catch (Exception ex)
             {

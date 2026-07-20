@@ -1,0 +1,14 @@
+[2026-07-14 19:50:00] [Info] ===== NX Logging Started =====
+[2026-07-14 19:50:00] [Debug] User: arunk, NX Version: v12
+[2026-07-14 19:50:00] [Info] Tool initialized with input directory: C:\Users\arunk\source\repos\AssemblyPractice\Input
+[2026-07-14 19:50:00] [Info] Output directory set to: C:\Users\arunk\source\repos\AssemblyPractice\Output
+[2026-07-14 19:50:00] [Info] Component: model2
+[2026-07-14 19:50:00] [Info] Body Type: NXOpen.Body
+[2026-07-14 19:50:00] [Info] Fcae Type: Cylindrical
+[2026-07-14 19:50:00] [Info] Fcae Type: Cylindrical
+[2026-07-14 19:50:00] [Info] Component: model1
+[2026-07-14 19:50:00] [Info] Body Type: NXOpen.Body
+[2026-07-14 19:50:00] [Info] Body Type: NXOpen.Body
+[2026-07-14 19:50:00] [Info] Fcae Type: Cylindrical
+[2026-07-14 19:50:01] [Info] Number of cylindrical faces in Model1: 1
+[2026-07-14 19:50:01] [Info] Number of cylindrical faces in Model2: 1
