@@ -70,6 +70,7 @@
     <Compile Include="UI_Part_Selection.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Res\Assembly Practice.docx" />
     <None Include="Res\UI_Part_Selection.dlx" />
   </ItemGroup>
   <ItemGroup>
