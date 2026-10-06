@@ -1,7 +1,9 @@
 ﻿using NXOpen;
 using NXOpen.Assemblies;
+using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 namespace AssemblyPractice
 {
     public class AssemblyUtilities
@@ -76,6 +78,65 @@ namespace AssemblyPractice
             matrix3X3.Zx = 0; matrix3X3.Zy = 0; matrix3X3.Zz = 1;
 
             componentAssembly.AddComponent(partFilePath, refSetName, compName, point3D, matrix3X3, 1, out partLoadStatus);
+        }
+
+        /// <summary>
+        /// Gets all the components in the assembly along with sub assemblies in all levels.
+        /// </summary>
+        /// <param name="subAssemblies"></param>
+        /// <returns></returns>
+        public static List<NXOpen.Assemblies.Component> GetAllComponents(out List<NXOpen.Assemblies.Component> subAssemblies)
+        {
+            List<NXOpen.Assemblies.Component> components;
+            Part workPart = Session.GetSession().Parts.Work;
+            Part displayPart = Session.GetSession().Parts.Display;
+
+            //Get all parts open in the session
+            //If it is an assembly, it gets all the components along with assembly, if ypu have 2 parts in an assembly it will give 3
+            //PartCollection partList=theSession.Parts;
+            //lw.WriteLine(Convert.ToString(partList.ToArray().Length));
+
+            //Getting all the sub assemblies and components in the assembly
+            subAssemblies = new List<Component>();
+            components = new List<Component>();
+
+            try
+            {
+                //If the display part is not an assembly than root component will be null
+                if (displayPart.ComponentAssembly.RootComponent is null)
+                {
+                    NXLogger.Instance.Log("It is not an assembly");
+                }
+                else
+                {
+                    NXOpen.Assemblies.Component rootComponent = displayPart.ComponentAssembly.RootComponent;
+
+                    //Going layer by level by level and getting all the child components
+                    //storing current level components into "currentLevelComponents" list and traversing them to get their child components
+                    //storing the child components in allChildComponents and making those child components into current level components and continuing the process
+                    List<Component> currentLevelComponents = rootComponent.GetChildren().ToList();
+                    List<Component> allChildComponents = rootComponent.GetChildren().ToList();
+                    while (true)
+                    {
+                        //Getting child components of current level and adding it to allChildComponents, if there are no child components loop terminates
+                        List<Component> childComponentsOfCurrentLevelComponents = currentLevelComponents.SelectMany(x => x.GetChildren()).ToList();
+                        if (childComponentsOfCurrentLevelComponents.Count == 0) break;
+                        allChildComponents.AddRange(childComponentsOfCurrentLevelComponents);
+                        currentLevelComponents = childComponentsOfCurrentLevelComponents;
+                    }
+
+                    //saparating assemblies and individual components from allChildComponents
+                    subAssemblies = allChildComponents.Where(x => x.GetChildren().Length != 0).ToList();
+                    components = allChildComponents.Where(x => x.GetChildren().Length == 0).ToList();
+
+                }
+                
+            }
+            catch (Exception ex)
+            {
+                NXOpen.UI.GetUI().NXMessageBox.Show("Error", NXMessageBox.DialogType.Error, Convert.ToString(ex.Message));
+            }
+            return components;
         }
         public static List<Face> GetFaceInComponent(Component component, string faceType, string inwardOrOutward = "all")
         {

@@ -6,7 +6,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using static NXOpen.GeometricAnalysis.GeometricProperties;
+//using static NXOpen.GeometricAnalysis.GeometricProperties;
 
 namespace AssemblyPractice
 {
@@ -54,28 +54,39 @@ namespace AssemblyPractice
                 ////}
 
                 ////Get components from assembly
-                var root = workPart.ComponentAssembly.RootComponent;
-                List<NXOpen.Face> reqFacesModel1 = new List<NXOpen.Face>();
-                List<NXOpen.Face> reqFacesModel2 = new List<NXOpen.Face>();
+                //var root = workPart.ComponentAssembly.RootComponent;
+                //Dictionary<double, List<Face>> reqFaces1 = new Dictionary<double, List<Face>>();
+                //Dictionary<double, List<Face>> reqFaces2 = new Dictionary<double, List<Face>>();
+                //List<NXOpen.Face> reqFacesModel1 = new List<NXOpen.Face>();
+                //List<NXOpen.Face> reqFacesModel2 = new List<NXOpen.Face>();
 
-                foreach (var comp in root.GetChildren())
+                //foreach (var comp in root.GetChildren())
+                //{
+                //    if (comp.Name.ToLower() == "cylinder20mm")
+                //    {
+                //        reqFacesModel1 = AssemblyUtilities.GetFaceInComponent(comp, "cylindrical", "outward");
+                //        NXUtilities.ChangeColor(comp, 211);
+
+                //    }
+                //    else if (comp.Name.ToLower() == "cylinder")
+                //    {
+                //        reqFacesModel2 = AssemblyUtilities.GetFaceInComponent(comp, "cylindrical", "outward");
+                //        NXUtilities.ChangeColor(comp,186);
+
+                //    }
+                //}
+                ////reqFacesModel1[0].Highlight(); reqFacesModel2[0].Highlight() ;
+                //NXLogger.Instance.Log("Number of cylindrical faces in Model1: " + reqFacesModel1.Count);
+                //NXLogger.Instance.Log("Number of cylindrical faces in Model2: " + reqFacesModel2.Count);
+
+                ////NXOpen.Edge edge1 = reqFacesModel1[0].GetEdges()[0];
+                ////NXOpen.Edge edge2 = reqFacesModel2[0].GetEdges()[1];
+                ////AssemblyUtilities.CreateConcentricConstraint(reqFacesModel1[0].OwningComponent, edge1,  reqFacesModel2[0].OwningComponent, edge2);
+                var components= AssemblyUtilities.GetAllComponents(out _);
+                foreach (var comp in components)
                 {
-                    if (comp.Name.ToLower() == "model1")
-                    {
-                        reqFacesModel1 = AssemblyUtilities.GetFaceInComponent(comp, "cylindrical", "outward");
-                    }
-                    else if (comp.Name.ToLower() == "model2")
-                    {
-                        reqFacesModel2 = AssemblyUtilities.GetFaceInComponent(comp, "cylindrical", "inward");
-                    }
+                    NXLogger.Instance.Log("Component: " + comp.DisplayName);
                 }
-                reqFacesModel1[0].Highlight(); reqFacesModel2[0].Highlight() ;
-                NXLogger.Instance.Log("Number of cylindrical faces in Model1: " + reqFacesModel1.Count);
-                NXLogger.Instance.Log("Number of cylindrical faces in Model2: " + reqFacesModel2.Count);
-
-                NXOpen.Edge edge1 = reqFacesModel1[0].GetEdges()[0];
-                NXOpen.Edge edge2 = reqFacesModel2[0].GetEdges()[1];
-                AssemblyUtilities.CreateConcentricConstraint(reqFacesModel1[0].OwningComponent, edge1,  reqFacesModel2[0].OwningComponent, edge2);
             }
             catch (Exception ex)
             {
